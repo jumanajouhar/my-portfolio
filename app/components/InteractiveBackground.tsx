@@ -102,7 +102,7 @@ export default function InteractiveBackground() {
         p.x += p.vx;
         p.y += p.vy;
 
-        ctx.fillStyle = "rgba(13, 13, 13, 0.25)";
+        ctx.fillStyle = "rgba(102, 102, 102, 0.25)";
         ctx.beginPath();
         ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
         ctx.fill();
@@ -129,9 +129,9 @@ export default function InteractiveBackground() {
         className="pointer-events-none fixed inset-0 z-0 opacity-40 blur-[60px]"
         style={{
           backgroundImage: `
-            radial-gradient(at 20% 20%, rgba(200, 200, 200, 0.6) 0px, transparent 50%),
-            radial-gradient(at 80% 80%, rgba(180, 180, 180, 0.4) 0px, transparent 50%),
-            radial-gradient(at 50% 50%, rgba(220, 220, 220, 0.5) 0px, transparent 50%)
+            radial-gradient(at 20% 20%, rgba(204, 204, 204, 0.4) 0px, transparent 50%),
+            radial-gradient(at 80% 80%, rgba(102, 102, 102, 0.3) 0px, transparent 50%),
+            radial-gradient(at 50% 50%, rgba(153, 153, 153, 0.2) 0px, transparent 50%)
           `,
           backgroundSize: "180% 180%",
           animation: "meshRotate 18s ease infinite",

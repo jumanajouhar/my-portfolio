@@ -3,6 +3,35 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
+function SunIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M12 2V4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M12 20V22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M4.93 4.93L6.34 6.34" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M17.66 17.66L19.07 19.07" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M2 12H4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M20 12H22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path
+        d="M21.5 14.0782C20.3003 14.7189 18.9301 15.0821 17.4751 15.0821C12.7949 15.0821 9 11.2872 9 6.60702C9 5.15201 9.36321 3.7818 10.0039 2.58203C5.86438 3.32832 2.75 6.94074 2.75 11.3142C2.75 16.3872 6.86281 20.5 11.9358 20.5C16.3093 20.5 19.9217 17.3856 20.668 13.2461L21.5 14.0782Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -11,26 +40,22 @@ export default function ThemeToggle() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <div className="h-9 w-9" />;
+  if (!mounted) {
+    return (
+      <div className="flex h-9 w-9 items-center justify-center border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] opacity-0" />
+    );
+  }
 
   const isDark = theme === "dark";
 
   return (
     <button
+      type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      aria-label="Toggle theme"
-      className="flex h-9 w-9 items-center justify-center border border-[var(--foreground)] bg-transparent text-[var(--foreground)] transition-all hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className="flex h-9 w-9 items-center justify-center border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] transition-colors hover:border-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-[var(--background)]"
     >
-      {isDark ? (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="12" cy="12" r="5" />
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-        </svg>
-      ) : (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </svg>
-      )}
+      {isDark ? <SunIcon /> : <MoonIcon />}
     </button>
   );
 }

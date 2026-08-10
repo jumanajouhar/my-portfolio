@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ThemeToggle from "./components/ThemeToggle";
+import { sendEmail } from "./actions/sendEmail";
 
 const experiences = [
   {
@@ -76,6 +77,14 @@ function LinkedinIcon() {
   );
 }
 
+function GmailIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="currentColor"/>
+    </svg>
+  );
+}
+
 function MenuIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -97,6 +106,41 @@ function CloseIcon() {
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("jumanajouhar@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("submitting");
+
+    const result = await sendEmail(formData);
+
+    if (result.success) {
+      setStatus("success");
+      setFormData({ fullName: "", email: "", subject: "", message: "" });
+    } else {
+      setStatus("error");
+    }
+  };
 
   return (
     <div className="relative min-h-screen text-[var(--foreground)] font-sentient bg-transparent">
@@ -269,11 +313,11 @@ export default function Home() {
                 {/* Left Column: Logo, Dates, Role & Tags */}
                 <div className="flex flex-col justify-between">
                   <div>
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center overflow-hidden border border-[var(--border)] bg-white p-1">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center overflow-hidden bg-transparent">
                       <img
                         src={exp.logo}
                         alt={`${exp.company} logo`}
-                        className="h-full w-full object-contain"
+                        className="h-full w-full object-contain mix-blend-multiply dark:invert dark:mix-blend-screen"
                       />
                     </div>
                     <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--muted)]">
@@ -334,10 +378,98 @@ export default function Home() {
             <p className="mt-6 max-w-2xl text-lg text-[var(--muted)]">
               Get in touch for software development or technical opportunities.
             </p>
+
+            <form onSubmit={handleSubmit} className="mt-12 max-w-2xl flex flex-col gap-6">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="fullName" className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--foreground)]">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    required
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    placeholder="Jane Doe"
+                    className="w-full border border-[var(--border)] bg-[var(--card-bg)] px-4 py-3 text-sm text-[var(--foreground)] placeholder-[var(--muted)] transition-colors focus:border-[var(--foreground)] focus:outline-none"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="email" className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--foreground)]">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="jane@example.com"
+                    className="w-full border border-[var(--border)] bg-[var(--card-bg)] px-4 py-3 text-sm text-[var(--foreground)] placeholder-[var(--muted)] transition-colors focus:border-[var(--foreground)] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="subject" className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--foreground)]">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  placeholder="Project Inquiry / Job Opportunity"
+                  className="w-full border border-[var(--border)] bg-[var(--card-bg)] px-4 py-3 text-sm text-[var(--foreground)] placeholder-[var(--muted)] transition-colors focus:border-[var(--foreground)] focus:outline-none"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="message" className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--foreground)]">
+                  Message *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  placeholder="Tell me about your project or role..."
+                  className="w-full resize-none border border-[var(--border)] bg-[var(--card-bg)] px-4 py-3 text-sm text-[var(--foreground)] placeholder-[var(--muted)] transition-colors focus:border-[var(--foreground)] focus:outline-none"
+                />
+              </div>
+
+              <div className="flex items-center gap-4">
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="border border-[var(--foreground)] bg-[var(--foreground)] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-[var(--background)] transition-all hover:opacity-85 disabled:opacity-50"
+                >
+                  {status === "submitting" ? "Sending..." : "Send Message →"}
+                </button>
+
+                {status === "success" && (
+                  <p className="text-xs uppercase tracking-wider text-green-600 dark:text-green-400">
+                    Message sent successfully!
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="text-xs uppercase tracking-wider text-red-600 dark:text-red-400">
+                    Failed to send. Please try again.
+                  </p>
+                )}
+              </div>
+            </form>
           </div>
 
           <div className="mt-20 border-t border-[var(--border)] pt-8">
-            <div className="flex items-center gap-7">
+            <div className="flex flex-wrap items-center gap-7">
               <a
                 href="https://github.com/jumanajouhar"
                 target="_blank"
@@ -357,6 +489,26 @@ export default function Home() {
               >
                 <LinkedinIcon />
               </a>
+
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=jumanajouhar@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Send email via Gmail"
+                  className="text-[var(--foreground)] transition-all hover:opacity-50"
+                >
+                  <GmailIcon />
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="border border-[var(--border)] bg-[var(--card-bg)] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-[var(--muted)] transition-colors hover:border-[var(--foreground)] hover:text-[var(--foreground)]"
+                >
+                  {copied ? "Copied! ✓" : "jumanajouhar@gmail.com"}
+                </button>
+              </div>
             </div>
           </div>
         </section>
