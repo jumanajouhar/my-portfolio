@@ -1,35 +1,57 @@
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=sentient@400,500,700,400i,700i&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=sentient@400,500,600,700,400i,700i&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #e8e8e8;
-  --foreground: #0d0d0d;
+  --background: #f5f3ef;
+  --foreground: #1a1918;
+  --muted: #73706b;
+  --border: rgba(26, 25, 24, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.5);
+  --nav-bg: rgba(245, 243, 239, 0.85);
+}
+
+[data-theme="dark"] {
+  --background: #0f0f11;
+  --foreground: #f4f4f5;
+  --muted: #a1a1aa;
+  --border: rgba(244, 244, 245, 0.15);
+  --card-bg: rgba(24, 24, 27, 0.5);
+  --nav-bg: rgba(15, 15, 17, 0.85);
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: 'Sentient', serif !important;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: 'Sentient', serif !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+h1, h2, h3, h4, h5, h6,
 p, span, a, button, div, input, textarea, select, label, li, small {
   font-family: 'Sentient', serif !important;
 }
 
-h1, h2, h3, h4, h5, h6, .font-clash {
-  font-family: 'Clash Display', sans-serif !important;
-}
-
 .font-sentient {
   font-family: 'Sentient', serif !important;
+}
+
+@keyframes meshRotate {
+  0% {
+    background-position: 0% 50%, 100% 50%, 50% 0%;
+  }
+  50% {
+    background-position: 100% 50%, 0% 50%, 50% 100%;
+  }
+  100% {
+    background-position: 0% 50%, 100% 50%, 50% 0%;
+  }
 }
