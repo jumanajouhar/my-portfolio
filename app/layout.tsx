@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import InteractiveBackground from "./components/InteractiveBackground";
 import { ThemeProvider } from "./components/ThemeProvider";
 
 export const metadata: Metadata = {
@@ -15,13 +14,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className="relative min-h-screen antialiased">
+      <head>
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=sentient@400,500,700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="relative min-h-screen antialiased font-serif">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
         >
-          <InteractiveBackground />
           <div className="relative z-10">{children}</div>
         </ThemeProvider>
       </body>

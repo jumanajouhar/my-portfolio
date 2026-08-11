@@ -1,48 +1,57 @@
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=sentient@400,500,700,400i,700i&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=sentient@400,500,700,400i,700i&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff; /* Clean Off-White */
-  --foreground: #000000; /* Pure Black Accent */
-  --nav-bg: rgba(255, 255, 255, 0.85);
-  --border: rgba(0, 0, 0, 0.15);
-  --muted: #666666;
-  --card-bg: rgba(204, 204, 204, 0.2);
+  --background: #F0E5D8;
+  --foreground: #2A2421;
+  --nav-bg: rgba(240, 229, 216, 0.88);
+  --border: #D8CBBC;
+  --muted: #6E645E;
+  --card-bg: rgba(255, 255, 255, 0.45);
+
+  --accent-teal: #A5C9CA;
+  --accent-teal-dark: #4A7071;
+  --accent-gold: #D9BF77;
+  --accent-terracotta: #C84B31;
+
+  --btn-bg: #C84B31;
+  --btn-text: #FFFFFF;
 }
 
-[data-theme='dark'] {
-  --background: #000000; /* Pitch Black */
-  --foreground: #ffffff;
-  --nav-bg: rgba(0, 0, 0, 0.85);
-  --border: rgba(255, 255, 255, 0.15);
-  --muted: #999999;
-  --card-bg: rgba(51, 51, 51, 0.4);
+.dark, [data-theme='dark'] {
+  --background: #1B1816;
+  --foreground: #F0E5D8;
+  --nav-bg: rgba(27, 24, 22, 0.88);
+  --border: #3A332E;
+  --muted: #B8ADA3;
+  --card-bg: rgba(240, 229, 216, 0.05);
+
+  --accent-teal: #A5C9CA;
+  --accent-teal-dark: #A5C9CA;
+  --accent-gold: #D9BF77;
+  --accent-terracotta: #E0644B;
+
+  --btn-bg: #D9BF77;
+  --btn-text: #1B1816;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: 'Sentient', serif !important;
 }
 
 html,
+body,
+h1, h2, h3, h4, h5, h6,
+button, input, textarea, select, a, span, p, div {
+  font-family: 'Sentient', serif !important;
+}
+
 body {
   margin: 0;
   padding: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Sentient', serif !important;
-}
-
-p, span, a, button, div, input, textarea, select, label, li, small {
-  font-family: 'Sentient', serif !important;
-}
-
-h1, h2, h3, h4, h5, h6, .font-clash {
-  font-family: 'Clash Display', sans-serif !important;
-}
-
-.font-sentient {
-  font-family: 'Sentient', serif !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
