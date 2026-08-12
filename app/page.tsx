@@ -340,7 +340,7 @@ export default function Home() {
           </h1>
 
           <p className="text-sm md:text-base text-[var(--muted)] max-w-2xl mx-auto mb-8 leading-relaxed">
-            A <span className="text-[var(--accent-terracotta)] font-semibold italic">Computer Science</span> graduate passionate about building reliable software, driving quality assurance, and exploring intelligent systems.
+            A <span className="text-[var(--accent-terracotta)] font-semibold italic">Computer Science</span> graduate passionate about system implementation, driving quality assurance, and exploring intelligent systems.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14 w-full sm:w-auto">

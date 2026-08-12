@@ -4,7 +4,7 @@ import { ThemeProvider } from "./components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Jumana Jouhar | Portfolio",
-  description: "Interactive site portfolio",
+  description: "Jumana Jouhar's Portfolio",
 };
 
 export default function RootLayout({
