@@ -129,7 +129,7 @@ const publications = [
   {
     title: "Fake News Detection Using Python and Machine Learning",
     publisher: "Procedia Computer Science (Elsevier)",
-    date: "Sep 2024",
+    date: "Apr 8, 2024",
     description: "Research exploring machine learning models to combat misinformation through data preprocessing, model training, and evaluation.",
     link: "https://www.sciencedirect.com/science/article/pii/S1877050924006252",
   },
