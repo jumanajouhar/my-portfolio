@@ -18,6 +18,12 @@
   --btn-text: #FFFFFF;
 }
 
+img[src*="dbs"], img[src*="cc"], img[src*="ailytics"], img[src*="intel"] {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  isolation: isolate;
+}
+
 .dark, [data-theme='dark'] {
   --background: #1B1816;
   --foreground: #F0E5D8;
