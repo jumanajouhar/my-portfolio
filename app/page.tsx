@@ -369,7 +369,7 @@ export default function Home() {
                 "Software Development",
                 "Software Testing & QA",
                 "Data & AI/ML Applications",
-                "Research",
+                "Automation",
               ].map((area) => (
                 <span
                   key={area}
