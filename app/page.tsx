@@ -369,7 +369,7 @@ export default function Home() {
                 "Project, Operations & Administration",
                 "Business & Data Analysis",
                 "Testing & Quality Assurance",
-                "AI & Process Automation",
+                "AI & Automation",
               ].map((area) => (
                 <span
                   key={area}
