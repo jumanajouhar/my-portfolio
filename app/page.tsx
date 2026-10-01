@@ -366,10 +366,10 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2.5">
               {[
-                "Software Development",
-                "Software Testing & QA",
-                "Data & AI/ML Applications",
-                "Automation",
+                "Project, Operations & Administration",
+                "Business & Data Analysis",
+                "Testing & Quality Assurance",
+                "AI & Process Automation",
               ].map((area) => (
                 <span
                   key={area}
